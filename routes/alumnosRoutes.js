@@ -13,6 +13,5 @@ router.get('/:id', getAlumnoById);
 router.post('/create', createAlumno);
 router.put('/update/:id', updateAlumno);
 router.delete('/delete/:id', deleteAlumno);
-//asdadsa
 
 module.exports = router;
