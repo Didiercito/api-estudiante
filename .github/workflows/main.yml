@@ -94,12 +94,12 @@ jobs:
           # Update docker-compose to use the new image
           sed -i 's|build: \.|image: ${{ env.DOCKER_IMAGE_NAME }}:latest|g' docker-compose.yml
           
-          # Start containers
-          docker-compose up -d
+          # Start containers (only db and api)
+          docker-compose up -d db api
           
           # Run database migrations
           echo "Running database migrations..."
-          docker-compose exec -T api npm run migrate || echo "No migrations to run"
+          docker-compose run --rm migrations
           
           # Health check
           sleep 10
