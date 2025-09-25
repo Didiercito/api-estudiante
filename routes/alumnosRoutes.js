@@ -8,10 +8,10 @@ const {
   deleteAlumno
 } = require('../controllers/alumnoController');
 
-router.get('/', getAllAlumnos);
+router.get('/todos', getAllAlumnos);
 router.get('/:id', getAlumnoById);
-router.post('/', createAlumno);
-router.put('/:id', updateAlumno);
-router.delete('/:id', deleteAlumno);
+router.post('/crear', createAlumno);
+router.put('/actualizar/:id', updateAlumno);
+router.delete('/eliminar/:id', deleteAlumno);
 
 module.exports = router;
