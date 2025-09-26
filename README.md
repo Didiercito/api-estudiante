@@ -3,7 +3,6 @@
 API RESTful para la gestión de **alumnos**. Construida con **Node.js, Express y Sequelize**, utilizando **MySQL** como base de datos y desplegada en **AWS EC2** con **Docker** y **GitHub Actions** para CI/CD.
 
 ---
-
 ## 📑 Índice
 
 1. [Tecnologías](#-tecnologías)  
