@@ -14,7 +14,8 @@ services:
       - DB_NAME=${DB_NAME}
       - PORT=${PORT}
     depends_on:
-      - db 
+      - db
+      - migrations  
 
   db:
     image: mysql:8.0
@@ -28,7 +29,20 @@ services:
     ports:
       - "3306:3306" 
     volumes:
-      - mysql-data:/var/lib/mysql 
+      - mysql-data:/var/lib/mysql
+
+  migrations:
+    build: .
+    container_name: migrations
+    environment:
+      - DB_HOST=db 
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    depends_on:
+      - db
+    command: ["npm", "run", "migrate"]
+    restart: "no"  
 
 volumes:
   mysql-data:

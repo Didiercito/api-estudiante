@@ -171,10 +171,41 @@ const deleteAlumno = async (req, res) => {
   }
 };
 
+const getAlumnosByCarrera = async (req, res) => {
+  try {
+    const { carrera } = req.params;
+    const alumnos = await Alumno.findAll({
+      where: { carrera },
+      order: [['id', 'DESC']]
+    });
+
+    if (alumnos.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: `No se encontraron alumnos en la carrera: ${carrera}`
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: alumnos,
+      message: `Alumnos de la carrera ${carrera} obtenidos correctamente`
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error al obtener los alumnos por carrera',
+      error: error.message
+    });
+  }
+};
+
+
 module.exports = {
   getAllAlumnos,
   getAlumnoById,
   createAlumno,
   updateAlumno,
-  deleteAlumno
+  deleteAlumno,
+  getAlumnosByCarrera
 };
